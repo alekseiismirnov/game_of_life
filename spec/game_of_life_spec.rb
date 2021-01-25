@@ -20,4 +20,19 @@ describe GameOfLife do
       expect(@game.get(5,6)).to eq(true)
     end
   end
+
+  context 'game rules works' do
+    before(:example) do
+      @game = GameOfLife.new(5, 5)
+      @single_dots = [[0,0], [2,3], [4,1]]
+    end
+    
+    it 'eliminates single dot on next turn' do
+      @single_dots.each do |dot|
+        @game.set(*dot)
+        @game.next
+        expect(@game.get(*dot)).to eq(false)
+      end
+    end
+  end
 end

@@ -3,7 +3,8 @@ class GameOfLife
     @rows = rows
     @cols = cols
 
-    @grid = Array.new(rows, Array.new(cols, false))
+    @grid = Array.new(rows+1, Array.new(cols+1, false))
+    @grid_mirror = Array.new(rows+1, Array.new(cols+1, false))
   end
 
   def get(row, col)
@@ -13,4 +14,9 @@ class GameOfLife
   def set(row, col)
     @grid[row][col] = true
   end
+
+  def next
+    @grid = Array.new(@rows+1, Array.new(@cols+1, false))
+  end
+  
 end
