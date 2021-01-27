@@ -24,15 +24,21 @@ describe GameOfLife do
   context 'game rules works' do
     before(:example) do
       @game = GameOfLife.new(5, 5)
-      @single_dots = [[0,0], [2,3], [4,1]]
+      @single_dots = [[1,1], [2,3], [5,1]]
+      @pre_block_edje = [[1,1], [1,2], [2,1]]
+      @pre_block = [[3,3], [4,3], [4,2]]
     end
-    
+
     it 'eliminates single dot on next turn' do
-      @single_dots.each do |dot|
-        @game.set(*dot)
-        @game.next
-        expect(@game.get(*dot)).to eq(false)
-      end
+      dot = [1,1]
+      @game.set(*dot)
+      @game.next
+      expect(@game.get(*dot)).to eq(false)
+    end
+
+    it 'makes new dot' do
+      @pre_block.each { |dot| @game.set(*dot)}
+      expect(@game.get(3,2)).to eq(true)
     end
   end
 end
