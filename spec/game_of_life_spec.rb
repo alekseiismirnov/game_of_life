@@ -25,7 +25,7 @@ describe GameOfLife do
     before(:example) do
       @game = GameOfLife.new(5, 5)
       @single_dots = [[1,1], [2,3], [5,1]]
-      @pre_block_edje = [[1,1], [1,2], [2,1]]
+      @pre_block_edje = [[1,1], [1,2], [2,2]]
       @pre_block = [[3,3], [4,3], [4,2]]
     end
 
@@ -36,9 +36,16 @@ describe GameOfLife do
       expect(@game.get(*dot)).to eq(false)
     end
 
-    it 'makes new dot' do
+     it 'makes new dot' do
       @pre_block.each { |dot| @game.set(*dot)}
+      @game.next
       expect(@game.get(3,2)).to eq(true)
+    end
+
+     it 'makes new dot' do
+      @pre_block_edje.each { |dot| @game.set(*dot)}
+      @game.next
+      expect(@game.get(2,1)).to eq(true)
     end
   end
 end
